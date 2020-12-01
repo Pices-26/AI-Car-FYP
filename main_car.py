@@ -83,9 +83,6 @@ if __name__ == '__main__':
     ps4_controller.init()
     cam = Camera()
     rc_car = Car()
-    rc_car.turn.angle = 90
-    rc_car.turn.angle = 130
-    rc_car.turn.angle = 110
     print('ready')
 
     while True:
@@ -95,13 +92,13 @@ if __name__ == '__main__':
 
         #square = data gathering
         if buttons[0]:
-            print("square")
+            print("data collection")
             cam._startThread()
             rc_car._csvCheck()
             while True:
                 buttons, axis, hat = ps4_controller.listen()
                 rc_car._manualDrive(axis)
-                #with 0 to -0.45 doesn't do anyting
+         
                 if axis[1] < -0.01:
                     frame = cam._getFrame()
                     rc_car._saveTrainingData(axis, frame)
@@ -119,7 +116,7 @@ if __name__ == '__main__':
                 if buttons[3]:
                     break
         
-        #allows for safe exit so that thread wouldn't cause interferance
+        #options button allows for safe exit so that thread wouldn't cause interferance
         if buttons[9]:
             break
 
