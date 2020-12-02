@@ -45,7 +45,7 @@ class Car():
         turn_angle = np.interp(con_input,[-1,1],[170,50])
         return turn_angle
 
-    #we will need to reduce speed as it's too fast + invert steering
+    #we will need to reduce speed as it's too fast + invert steering + map speed to controller
     def _speedReduction(self, con_input):
         #inversing
         speed = con_input * -1.0
