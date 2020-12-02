@@ -50,7 +50,6 @@ class Car():
         #inversing
         speed = con_input * -1.0
     
-        #reducing deadzone
         if speed > -0.0:
             #print("forward")
             speed_new = np.interp(speed,[0.0,1.0],[0.56,0.65])
