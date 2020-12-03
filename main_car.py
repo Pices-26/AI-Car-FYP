@@ -12,7 +12,6 @@ from random import choice
 import cv2
 import pygame
 
-#we will need a car class
 class Car():
     def __init__(self):
         #servo init
@@ -51,11 +50,10 @@ class Car():
         #inversing
         speed = con_input * -1.0
     
-        #reducing deadzone
         if speed > -0.0:
             #print("forward")
             speed_new = np.interp(speed,[0.0,1.0],[0.8,1.0])
-            #reducing speed
+            #reducing speed if needed
             final_speed = speed_new * 1.0
             return final_speed
         elif speed < -0.0:
