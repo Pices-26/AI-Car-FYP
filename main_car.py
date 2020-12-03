@@ -10,6 +10,7 @@ from camera import Camera
 import string
 from random import choice
 import cv2
+import pygame
 
 #we will need a car class
 class Car():
@@ -42,25 +43,26 @@ class Car():
 
     #maps range of turning to controller input range
     def _turnMapping(self, con_input):
-        turn_angle = np.interp(con_input,[-1,1],[170,50])
+        turn_angle = np.interp(con_input,[-1,1],[175,45])
         return turn_angle
 
-    #we will need to reduce speed as it's too fast + invert steering + map speed to controller
+    #we will need to reduce speed as it's too fast + invert steering
     def _speedReduction(self, con_input):
         #inversing
         speed = con_input * -1.0
     
+        #reducing deadzone
         if speed > -0.0:
             #print("forward")
-            speed_new = np.interp(speed,[0.0,1.0],[0.56,0.65])
+            speed_new = np.interp(speed,[0.0,1.0],[0.8,1.0])
             #reducing speed
-            final_speed = speed_new * 0.28
+            final_speed = speed_new * 1.0
             return final_speed
         elif speed < -0.0:
             #print("back")
-            speed_new = np.interp(speed,[-0.0,-1.0],[-0.6,-0.65])
+            speed_new = np.interp(speed,[-0.0,-1.0],[-0.8,-1.0])
             #reducing speed
-            final_speed = speed_new * 0.25
+            final_speed = speed_new * 1.0
             return final_speed
         else:
             return speed  
@@ -82,22 +84,25 @@ if __name__ == '__main__':
     ps4_controller.init()
     cam = Camera()
     rc_car = Car()
+    rc_car.turn.angle = 90
+    rc_car.turn.angle = 130
+    rc_car.turn.angle = 110
     print('ready')
 
     while True:
         buttons, axis, hat = ps4_controller.listen()
-        print(buttons)
+        #print(buttons)
         #rc_car.manual_drive(axis)
 
         #square = data gathering
         if buttons[0]:
-            print("data collection")
+            print("square")
             cam._startThread()
             rc_car._csvCheck()
             while True:
                 buttons, axis, hat = ps4_controller.listen()
                 rc_car._manualDrive(axis)
-         
+                #with 0 to -0.45 doesn't do anyting
                 if axis[1] < -0.01:
                     frame = cam._getFrame()
                     rc_car._saveTrainingData(axis, frame)
@@ -115,7 +120,7 @@ if __name__ == '__main__':
                 if buttons[3]:
                     break
         
-        #options button allows for safe exit so that thread wouldn't cause interferance
+        #allows for safe exit so that thread wouldn't cause interferance
         if buttons[9]:
             break
 
