@@ -1,27 +1,32 @@
 from threading import Thread, Lock
 import cv2
 
+#resolutions to be tested
+# 1280x720
+# 864x480
+
 class Camera:
-    def __init__(self, flip = 2, dispW = 1280, dispH = 720) :
+    def __init__(self, flip = 2, dispW = 864, dispH = 480) :
         self.flip = flip
         self.dispW = dispW
         self.dispH = dispH
-        #self.pipeline = 'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=3264, height=2464, format=NV12, framerate=21/1 ! nvvidconv flip-method='+str(self.flip)+' ! video/x-raw, width='+str(self.dispW)+', height='+str(self.dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink'
+        #self.pipeline = 'nvarguscamerasrc !  video/x-raw(memory:NVMM), width=864, height=480, format=NV12, framerate=30/1 ! nvvidconv flip-method='+str(self.flip)+' ! video/x-raw, width='+str(self.dispW)+', height='+str(self.dispH)+', format=BGRx ! videoconvert ! video/x-raw, format=BGR ! appsink'
         #self.videoFeed = cv2.VideoCapture(self.pipeline)
 
         self.videoFeed = cv2.VideoCapture(0)
         self.videoFeed.set(cv2.CAP_PROP_FRAME_WIDTH, self.dispW/2)
         self.videoFeed.set(cv2.CAP_PROP_FRAME_HEIGHT, self.dispH/2)
-        self.fps = self.videoFeed.get(cv2.CAP_PROP_FPS)
+        #self.fps = self.videoFeed.get(cv2.CAP_PROP_FPS)
+        #self.videoFeed.set(cv2.CAP_PROP_FPS, 5)
 
         self.ret, self.frame = self.videoFeed.read()
         self.thread = Thread(target=self._sync)
         self.on = False#
         self.lock = Lock()#
 
-    def _passFPS(self):
-        f = self.fps
-        return f
+    #def _passFPS(self):
+        #f = self.fps
+        #return f
 
     def _startThread(self):
         if self.on:#         
@@ -57,8 +62,8 @@ if __name__ == "__main__" :
     while True :
         frame = c._getFrame()
         cv2.imshow('webcam', frame)
-        f=c._passFPS()
-        print('framerate = {}'.format(f))
+        #f=c._passFPS()
+        #print('framerate = {}'.format(f))
         if cv2.waitKey(1) == ord('q') :
             break
     c._stopThread()
