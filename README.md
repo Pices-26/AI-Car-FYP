@@ -8,7 +8,7 @@ con_py_test.py - Only code which I didn't write. Reproducing the code didn't mak
 
 ### Code written/used on a Main Computer using Jupyter
 custom model.ipynb - Custom written CNN model + reading data + processing data + training.  
-ResNet50V2 tweaked model.ipynb - Tweaked ResNet50V2 model + reading data + processing data + training.
+ResNet50V2 tweaked model.ipynb - Tweaked ResNet50V2 model + reading data + processing data + training. (Code based on: https://arxiv.org/pdf/1912.05440.pdf)
 
 ### Rest of Experimental Code
 data_augmentation.ipynb - Attempt to bin data + have the same amount of straight data as turning data (didn't perform well).  
