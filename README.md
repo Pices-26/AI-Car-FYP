@@ -10,6 +10,9 @@ con_py_test.py - Only code which I didn't write. Reproducing the code didn't mak
 custom model.ipynb - Custom written CNN model + reading data + processing data + training.  
 ResNet50V2 tweaked model.ipynb - Tweaked ResNet50V2 model + reading data + processing data + training. (Code based on: https://arxiv.org/pdf/1912.05440.pdf)
 
+### Additional
+custom model merging.ipynb - Read extended description of this file for explanation
+
 ### Rest of Experimental Code
 data_augmentation.ipynb - Attempt to bin data + have the same amount of straight data as turning data (didn't perform well).  
 img_preprocessing_test.ipynb - Code to play around with to create best image preprocessing.  
