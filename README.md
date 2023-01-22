@@ -19,4 +19,4 @@ img_preprocessing_test.ipynb - Code to play around with to create best image pre
 data_merging_attempt - Due to not having enough of straight line data, a straigh line track was made to gather only stright line data and combine it with track data (didn't perform well).
 
 ### Video Demonstration
-In progress...  
+https://www.youtube.com/watch?v=ZrHEkA1HPVY&t=2s&ab_channel=pices26
